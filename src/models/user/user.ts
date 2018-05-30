@@ -5,5 +5,6 @@ export class User{
     last_name: string;
     email: string;
     admin: boolean;
+    gravatarUrl: any;
 }
 

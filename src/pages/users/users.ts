@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, 
+  NavController, 
+  NavParams, 
+  LoadingController,
+  Refresher } from 'ionic-angular';
 
 import { User } from '../../models/user/user';
+import { UserCreatePage } from '../user-create/user-create';
 import { UserProvider } from '../../providers/user/user';
-
-
-/**
- * Generated class for the UsersPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { UserPage } from '../user/user';
 
 @IonicPage()
 @Component({
@@ -32,7 +30,26 @@ export class UsersPage {
 
   ionViewDidLoad() {
     this.getUsers();
-}
+  }
+
+  public doRefresh(refresher: Refresher): void{
+
+    this.userProvider.getUsers().subscribe(
+      (response:any)=>{
+        this.users = response.users;
+        refresher.complete();
+      }
+    );
+
+    setTimeout(
+      ()=>{
+        refresher.complete();
+      },
+      2000
+    );
+
+    
+  }
 
   public getUsers(): void{
     this.presentLoader();
@@ -51,5 +68,13 @@ export class UsersPage {
       content: 'Loading...'
     });
     this.loader.present();
+  }
+
+  public toUser(id: string): void{
+    this.navCtrl.push(UserPage, { id: id });
+  }
+  
+  public toCreateUser(): void{
+    this.navCtrl.push(UserCreatePage);
   }
 }
