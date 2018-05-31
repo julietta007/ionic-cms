@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>article-create</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="article" (ngSubmit)="createArticle()">
+
+      <ion-list>
+    
+        <ion-item no-lines class="alert alert-error no-lines" *ngIf="errorMessage">{{ errorMessage }}</ion-item>
+        
+        <ion-item no-lines [ngClass]="{'has-error':errors.title}" >
+          <ion-label floating>Title</ion-label>
+          <ion-input type="text" formControlName="title"></ion-input>
+        </ion-item>
+    
+        <ion-item no-lines class="no-lines has-error" *ngIf="errors.title">{{ errors.title.message }}</ion-item>
+            
+      </ion-list>
+  
+      <button ion-button full type="submit">Submit</button>
+      
+    </form>
+
+    </ion-content>
