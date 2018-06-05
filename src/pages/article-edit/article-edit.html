@@ -16,7 +16,7 @@
 <ion-content padding>
   <form *ngIf="myArticle" [formGroup]="article" (ngSubmit)="editArticle()">
     
-    <ion-input type="text" formControlName="_id" value= "{{ myArticle._id }}"></ion-input>
+    <ion-input type="hidden" formControlName="_id" value= "{{ myArticle._id }}"></ion-input>
     
     <ion-list>
       <ion-item no-lines class="alert alert-message no-lines" *ngIf="errorMessage">{{ errorMessage }}</ion-item>
